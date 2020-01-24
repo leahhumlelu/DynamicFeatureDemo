@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Dynamic Feature Demo</string>
+    <string name="title_dynamicfeatureinstall">Dynamic Feature At Install</string>
+    <string name="instructions">Press a button to perform an action</string>
+    <string name="load_feature_at_install">Load feature at install</string>
+    <string name="load_feature_on_demand">Load feature on demand</string>
+    <string name="load_feature_conditonal">Load feature conditional</string>
+    <string name="title_dynamicfeatureondemand">Dynamic Feature On Demand</string>
+    <string name="uninstall_feature_at_install">Uninstall feature at install</string>
+    <string name="uninstall_feature_on_demand">Uninstall feature on demand</string>
+    <string name="uninstall_feature_conditonal">Uninstall feature conditional</string>
+</resources>

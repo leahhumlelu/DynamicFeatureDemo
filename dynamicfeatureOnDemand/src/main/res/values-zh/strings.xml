@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_on_demand_msg">这是一个按需安装的功能</string>
+</resources>

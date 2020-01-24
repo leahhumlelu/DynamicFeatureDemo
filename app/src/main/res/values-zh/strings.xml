@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dynamic Feature Demo</string>
+    <string name="title_dynamicfeatureinstall">安裝時的動態功能</string>
+    <string name="instructions">請選擇要執行的動作</string>
+    <string name="load_feature_at_install">加載安裝時的功能</string>
+    <string name="load_feature_on_demand">加載必要的功能</string>
+    <string name="load_feature_conditonal">加載滿足條件的功能</string>
+    <string name="uninstall_feature_at_install">Uninstall feature at install</string>
+    <string name="uninstall_feature_on_demand">Uninstall feature on demand</string>
+    <string name="uninstall_feature_conditonal">Uninstall feature conditional</string>
+</resources>

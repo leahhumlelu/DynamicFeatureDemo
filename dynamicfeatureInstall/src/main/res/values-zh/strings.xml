@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_at_install_msg">此功能在程序安装时已安装</string>
+</resources>

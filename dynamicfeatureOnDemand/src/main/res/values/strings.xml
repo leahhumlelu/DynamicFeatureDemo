@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_on_demand_msg">This is a feature installed on demand</string>
+</resources>

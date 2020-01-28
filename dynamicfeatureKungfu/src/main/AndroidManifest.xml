@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.hcljapan.dynamicfeaturekungfu">
+
+    <dist:module
+        dist:instant="false"
+        dist:title="@string/title_dynamic_feature_kungfu">
+        <dist:delivery>
+            <dist:install-time>
+                <dist:conditions>
+
+                    <!-- To include or exclude this module by user countries, uncomment and update this section. -->
+                    <!-- Learn more @ [https://d.android.com/r/studio-ui/dynamic-delivery/conditional-delivery] -->
+                    <!-- <dist:user-countries dist:exclude="false"> -->
+                    <!-- <dist:country dist:code="US" /> -->
+                    <!-- </dist:user-countries> -->
+                    <dist:user-countries dist:exclude="true">
+                        <!-- Specifies the two-letter  CLDR country code for regions that should
+                        not download the module at app install-time. -->
+                        <dist:country dist:code="IN"/>
+                    </dist:user-countries>
+                </dist:conditions>
+            </dist:install-time>
+        </dist:delivery>
+
+        <dist:fusing dist:include="true" />
+    </dist:module>
+
+    <application>
+        <activity android:name="com.hcljapan.dynamicfeaturekungfu.KungfuActivity"></activity>
+    </application>
+
+</manifest>

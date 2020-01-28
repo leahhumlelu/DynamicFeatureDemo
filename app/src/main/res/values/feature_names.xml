@@ -20,5 +20,6 @@
     tools:ignore="MissingTranslation">
     <string name="module_feature_at_install">dynamicfeatureInstall</string>
     <string name="module_feature_on_demand">dynamicfeatureOnDemand</string>
-    <string name="module_feature_conditional">dynamicfeatureConditional</string>
+    <string name="module_feature_kungfu">dynamicfeatureKungfu</string>
+    <string name="module_feature_judo">dynamicfeatureJudo</string>
 </resources>

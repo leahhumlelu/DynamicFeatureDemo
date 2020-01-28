@@ -1,7 +1,5 @@
 package com.hcljapan.dynamicfeaturedemo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,15 +22,17 @@ import com.google.android.play.core.tasks.Task;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, SplitInstallStateUpdatedListener {
+public class MainActivity extends BaseSplitActivity implements View.OnClickListener, SplitInstallStateUpdatedListener {
     private static final String TAG = "MainActivity";
-    private String moduleInstall,moduleDemand,moduleCondtional;
+    private String moduleInstall,moduleDemand, moduleKungfu, moduleJudo;
     //private List<String> installableModules;
     private SplitInstallManager manager;
-    public static final String PACKAGE_NAME = "com.hcljapa.dynamicfeature";
+    public static final String PACKAGE_NAME = "com.hcljapan.dynamicfeature";
     public static final String PACKAGE_NAME_AT_INSTALL = PACKAGE_NAME+"install"+".AtInstallActivity";
     public static final String PACKAGE_NAME_ON_DEMAND = PACKAGE_NAME+"ondemand"+".OnDemandActivity";
-    public static final String PACKAGE_NAME_CONDITIONAL = PACKAGE_NAME+"conditional"+".CondtionalActivity";
+    public static final String PACKAGE_NAME_KUNGFU= PACKAGE_NAME+"kungfu"+".KungfuActivity";
+    public static final String PACKAGE_NAME_JUDO = PACKAGE_NAME+"judo"+".JudoActivity";
+
     private int sessionId =0;
 
     @Override
@@ -40,16 +40,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         moduleInstall = getString(R.string.module_feature_at_install);
-        moduleCondtional = getString(R.string.module_feature_conditional);
+        moduleKungfu = getString(R.string.module_feature_kungfu);
         moduleDemand = getString(R.string.module_feature_on_demand);
-        //installableModules = Arrays.asList(moduleInstall,moduleDemand,moduleCondtional);
+        moduleJudo =getString(R.string.module_feature_judo);
+        //installableModules = Arrays.asList(moduleInstall,moduleDemand,moduleKungfu);
         manager = SplitInstallManagerFactory.create(this);
         findViewById(R.id.btn_load_feature_at_install).setOnClickListener(this);
         findViewById(R.id.btn_load_feature_on_demand).setOnClickListener(this);
-        findViewById(R.id.btn_load_feature_conditional).setOnClickListener(this);
+        findViewById(R.id.btn_load_feature_when_in_india).setOnClickListener(this);
+        findViewById(R.id.btn_load_feature_when_in_china).setOnClickListener(this);
         findViewById(R.id.btn_uninstall_feature_at_install).setOnClickListener(this);
         findViewById(R.id.btn_uninstall_feature_on_demand).setOnClickListener(this);
         findViewById(R.id.btn_uninstall_feature_conditional).setOnClickListener(this);
+
     }
 
     @Override
@@ -73,8 +76,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_load_feature_on_demand:
                 loadAndLaunchModule(moduleDemand);
                 break;
-            case R.id.btn_load_feature_conditional:
-                loadAndLaunchModule(moduleCondtional);
+            case R.id.btn_load_feature_when_in_india:
+                loadAndLaunchModule(moduleJudo);
                 break;
             case R.id.btn_uninstall_feature_at_install:
                 uninstallModule(moduleInstall);
@@ -83,14 +86,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 uninstallModule(moduleDemand);
                 break;
             case R.id.btn_uninstall_feature_conditional:
-                uninstallModule(moduleCondtional);
+                uninstallModule(moduleKungfu);
+                break;
+            case R.id.btn_load_feature_when_in_china:
+                loadAndLaunchModule(moduleKungfu);
                 break;
         }
     }
 
     private void loadAndLaunchModule(final String moduleName) {
         if(manager.getInstalledModules().contains(moduleName)){
-            toastAndLog("loadAndLaunchModule: already installed");
+            toastAndLog("loadAndLaunchModule: "+moduleName+ " already installed");
             onSuccessfulLoad(moduleName,true);
             return;
         }
@@ -108,11 +114,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switch (((SplitInstallException)e).getErrorCode()){
                     case SplitInstallErrorCode
                             .NETWORK_ERROR:
-                        toastAndLog("NETWORK error install "+moduleName+" exception "+e.getLocalizedMessage());
+                        toastAndLog("NETWORK error install " + moduleName + " exception " + e.getLocalizedMessage());
                         break;
-                        case SplitInstallErrorCode.ACTIVE_SESSIONS_LIMIT_EXCEEDED:
-                            checkForActiveDownloads();
-                            break;
+                    case SplitInstallErrorCode.ACTIVE_SESSIONS_LIMIT_EXCEEDED:
+                        checkForActiveDownloads();
+                        break;
+                    case SplitInstallErrorCode.MODULE_UNAVAILABLE:
+                        toastAndLog("module "+moduleName+" not available exception "+e.getLocalizedMessage());
+                        break;
                 }
             }
         });
@@ -142,8 +151,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 launchActivity(PACKAGE_NAME_AT_INSTALL);
             }else if(moduleName.equals(moduleDemand)){
                 launchActivity(PACKAGE_NAME_ON_DEMAND);
-            }else if(moduleName.equals(moduleCondtional)){
-                launchActivity(PACKAGE_NAME_CONDITIONAL);
+            }else if(moduleName.equals(moduleKungfu)){
+                launchActivity(PACKAGE_NAME_KUNGFU);
+            }else if(moduleName.equals(moduleJudo)){
+                launchActivity(PACKAGE_NAME_JUDO);
             }
         }
     }
@@ -167,12 +178,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                case SplitInstallSessionStatus.DOWNLOADING:
                    long totalBytes = state.totalBytesToDownload();
                    long progress = state.bytesDownloaded();
-                   float ratio = progress / totalBytes *100;
-                   toastAndLog(ratio +" % has been downloaded");
+                   float ratio = progress / totalBytes * 100;
+                   toastAndLog(progress + "/"+totalBytes+" has been downloaded");
                    break;
-                   case SplitInstallSessionStatus.INSTALLED:
-                       //todo
-                       break;
+               case SplitInstallSessionStatus.INSTALLED:
+                   //todo
+                   break;
 
            }
        }

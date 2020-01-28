@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.hcljapan.dynamicfeaturejudo">
+
+    <dist:module
+        dist:instant="false"
+        dist:title="@string/title_dynamic_feature_judo">
+        <dist:delivery>
+            <dist:install-time>
+                <dist:conditions>
+                    <dist:user-countries dist:exclude="true">
+                        <!-- Specifies the two-letter  CLDR country code for regions that should
+                        not download the module at app install-time. -->
+                        <dist:country dist:code="CN"/>
+                    </dist:user-countries>
+                    <!-- To include or exclude this module by user countries, uncomment and update this section. -->
+                    <!-- Learn more @ [https://d.android.com/r/studio-ui/dynamic-delivery/conditional-delivery] -->
+                    <!-- <dist:user-countries dist:exclude="false"> -->
+                    <!-- <dist:country dist:code="US" /> -->
+                    <!-- </dist:user-countries> -->
+                </dist:conditions>
+            </dist:install-time>
+        </dist:delivery>
+
+        <dist:fusing dist:include="true" />
+    </dist:module>
+
+    <application>
+        <activity android:name="com.hcljapan.dynamicfeaturejudo.JudoActivity"></activity>
+    </application>
+
+</manifest>

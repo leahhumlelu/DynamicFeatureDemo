@@ -7,8 +7,8 @@ android {
         applicationId "com.hcljapan.dynamicfeaturedemo"
         minSdkVersion 15
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -19,19 +19,7 @@ android {
     }
 
 
-    dynamicFeatures = [":dynamicfeatureInstall", ":dynamicfeatureOnDemand"]
-
-    bundle {
-        language {
-            enableSplit = true
-        }
-        density {
-            enableSplit = true
-        }
-        abi {
-            enableSplit = true
-        }
-    }
+    dynamicFeatures = [":dynamicfeatureInstall", ":dynamicfeatureOnDemand", ":dynamicfeatureKungfu", ":dynamicfeatureJudo"]
 
 
 }

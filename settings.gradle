@@ -1,2 +1,2 @@
-include ':app', ':dynamicfeatureInstall', ':dynamicfeatureOnDemand'
+include ':app', ':dynamicfeatureInstall', ':dynamicfeatureOnDemand', ':dynamicfeatureJudo', ':dynamicfeatureKungfu'
 rootProject.name='Dynamic Feature Demo'
